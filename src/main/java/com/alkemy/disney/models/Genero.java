@@ -18,24 +18,52 @@ public class Genero {
     private long id;
 
     //relaacion
-
+    @OneToMany(mappedBy="genero", fetch=FetchType.EAGER)
+    private Set<GeneroPeliculaSerie> generoPeliculaSeries = new HashSet<>();
 
     //atributos
-    private String number;
-    private LocalDateTime creationDate;
-    private Double balance;
+    private String nombre;
+    private String imagen;
 
     //constructor
     public Genero() {
     }
 
-    public Genero(String number, LocalDateTime creationDate, double balance) {
-        this.number = number;
-        this.creationDate = creationDate;
-        this.balance = balance;
+    public Genero(String nombre, String imagen) {
+        this.nombre = nombre;
+        this.imagen = imagen;
     }
 
     //getters y setters
+    public long getId() {
+        return id;
+    }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public Set<GeneroPeliculaSerie> getGeneroPeliculaSeries() {
+        return generoPeliculaSeries;
+    }
+
+    public void setGeneroPeliculaSeries(Set<GeneroPeliculaSerie> generoPeliculaSeries) {
+        this.generoPeliculaSeries = generoPeliculaSeries;
+    }
 }

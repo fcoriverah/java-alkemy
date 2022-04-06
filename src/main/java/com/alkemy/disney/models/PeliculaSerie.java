@@ -26,6 +26,9 @@ public class PeliculaSerie {
     @OneToMany(mappedBy="peliculaSerie", fetch=FetchType.EAGER)
     private Set<PersonajePeliculaSerie> personajePeliculasSeries = new HashSet<>();
 
+    @OneToMany(mappedBy="peliculaSerie", fetch=FetchType.EAGER)
+    private Set<GeneroPeliculaSerie> generoPeliculaSeries = new HashSet<>();
+
     //atributos
     private String imagen;
     private String titulo;
@@ -96,5 +99,13 @@ public class PeliculaSerie {
 
     public void setPersonajePeliculasSeries(Set<PersonajePeliculaSerie> personajePeliculasSeries) {
         this.personajePeliculasSeries = personajePeliculasSeries;
+    }
+
+    public Set<GeneroPeliculaSerie> getGeneroPeliculaSeries() {
+        return generoPeliculaSeries;
+    }
+
+    public void setGeneroPeliculaSeries(Set<GeneroPeliculaSerie> generoPeliculaSeries) {
+        this.generoPeliculaSeries = generoPeliculaSeries;
     }
 }

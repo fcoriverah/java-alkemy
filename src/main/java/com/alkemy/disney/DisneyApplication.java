@@ -1,11 +1,7 @@
 package com.alkemy.disney;
 
-import com.alkemy.disney.models.PeliculaSerie;
-import com.alkemy.disney.models.Personaje;
-import com.alkemy.disney.models.PersonajePeliculaSerie;
-import com.alkemy.disney.repositories.PeliculaSerieRepository;
-import com.alkemy.disney.repositories.PersonajePeliculaSerieRepository;
-import com.alkemy.disney.repositories.PersonajeRepository;
+import com.alkemy.disney.models.*;
+import com.alkemy.disney.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,7 +20,9 @@ public class DisneyApplication {
 	public CommandLineRunner initData(
 			PersonajeRepository personajeRepository,
 			PeliculaSerieRepository peliculaSerieRepository,
-			PersonajePeliculaSerieRepository personajePeliculaSerieRepository
+			PersonajePeliculaSerieRepository personajePeliculaSerieRepository,
+			GeneroRepository generoRepository,
+			GeneroPeliculaSerieRepository generoPeliculaSerieRepository
 	) {
 		return (args) -> {
 			//guardar cliente en el repositorio
@@ -42,6 +40,12 @@ public class DisneyApplication {
 
 			PeliculaSerie peliculaSerie3 = new PeliculaSerie(personaje1, "https://static.wikia.nocookie.net/titanic", "Titanic", LocalDateTime.now(), 5);
 			peliculaSerieRepository.save(peliculaSerie3);
+
+			Genero genero1 = new Genero("Terror", "http://imagen.com/terror");
+			generoRepository.save(genero1);
+
+			GeneroPeliculaSerie generoPeliculaSerie1 = new GeneroPeliculaSerie(genero1, peliculaSerie1);
+			generoPeliculaSerieRepository.save(generoPeliculaSerie1);
 
 			personajePeliculaSerieRepository.save(new PersonajePeliculaSerie(personaje1, peliculaSerie1));
 			personajePeliculaSerieRepository.save(new PersonajePeliculaSerie(personaje1, peliculaSerie2));
