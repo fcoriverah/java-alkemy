@@ -1,6 +1,7 @@
 package com.alkemy.disney.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -18,16 +19,16 @@ public class Personaje {
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
 
-    //relacion con PersonajePeliculaSerie
-    @OneToMany(mappedBy="personaje", fetch=FetchType.EAGER)
-    private Set<PersonajePeliculaSerie> personajePeliculasSeries = new HashSet<>();
-
     //atributos
     private String imagen;
     private String nombre;
     private Integer edad;
     private Double peso;
     private String historia;
+
+    //relacion ManyToMany con peliculaSeries
+    @ManyToMany(mappedBy = "personajes")
+    private Set<PeliculaSerie> peliculasSeries = new HashSet<>();
 
     //constructor
     public Personaje() {
@@ -86,11 +87,12 @@ public class Personaje {
         this.historia = historia;
     }
 
-    public Set<PersonajePeliculaSerie> getPersonajePeliculasSeries() {
-        return personajePeliculasSeries;
+    @JsonIgnore
+    public Set<PeliculaSerie> getPeliculasSeries() {
+        return peliculasSeries;
     }
 
-    public void setPersonajePeliculasSeries(Set<PersonajePeliculaSerie> personajePeliculasSeries) {
-        this.personajePeliculasSeries = personajePeliculasSeries;
+    public void setPeliculasSeries(Set<PeliculaSerie> peliculasSeries) {
+        this.peliculasSeries = peliculasSeries;
     }
 }

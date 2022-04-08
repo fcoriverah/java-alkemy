@@ -2,9 +2,7 @@ package com.alkemy.disney.controllers;
 
 import com.alkemy.disney.dtos.PeliculaSerieDTO;
 import com.alkemy.disney.dtos.PersonajeDTO;
-import com.alkemy.disney.models.PeliculaSerie;
 import com.alkemy.disney.repositories.PeliculaSerieRepository;
-import com.alkemy.disney.repositories.PersonajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

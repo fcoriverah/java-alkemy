@@ -1,6 +1,7 @@
 package com.alkemy.disney.dtos;
 
 import com.alkemy.disney.models.Genero;
+import com.alkemy.disney.models.PeliculaSerie;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Set;
@@ -8,19 +9,16 @@ import java.util.stream.Collectors;
 
 public class GeneroDTO {
 
-    @Autowired
-
-
     //atributos
     private String nombre;
     private String imagen;
-    private Set<GeneroPeliculaSerieDTO> peliculasSeries;
+    private Set<PeliculaSerie> peliculasSeries;
 
     //constructor
     public GeneroDTO(Genero genero) {
         this.nombre = genero.getNombre();
         this.imagen = genero.getImagen();
-        this.peliculasSeries = genero.getGeneroPeliculaSeries().stream().map(GeneroPeliculaSerieDTO::new).collect(Collectors.toSet());
+        this.peliculasSeries = genero.getPeliculasSeries();
     }
 
     //getter y setter
@@ -40,11 +38,11 @@ public class GeneroDTO {
         this.imagen = imagen;
     }
 
-    public Set<GeneroPeliculaSerieDTO> getPeliculasSeries() {
+    public Set<PeliculaSerie> getPeliculasSeries() {
         return peliculasSeries;
     }
 
-    public void setPeliculasSeries(Set<GeneroPeliculaSerieDTO> peliculasSeries) {
+    public void setPeliculasSeries(Set<PeliculaSerie> peliculasSeries) {
         this.peliculasSeries = peliculasSeries;
     }
 }

@@ -1,6 +1,8 @@
 package com.alkemy.disney.dtos;
 
+import com.alkemy.disney.models.PeliculaSerie;
 import com.alkemy.disney.models.Personaje;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,7 +16,7 @@ public class PersonajeDTO {
     private Integer edad;
     private Double peso;
     private String historia;
-    private Set<PersonajePeliculaSerieDTO> peliculasSeries;
+    private Set<PeliculaSerie> peliculasSeries;
 
     //constructor
     public PersonajeDTO(Personaje personaje) {
@@ -24,7 +26,7 @@ public class PersonajeDTO {
         this.edad = personaje.getEdad();
         this.peso = personaje.getPeso();
         this.historia = personaje.getHistoria();
-        this.peliculasSeries = personaje.getPersonajePeliculasSeries().stream().map(PersonajePeliculaSerieDTO::new).collect(Collectors.toSet());
+        this.peliculasSeries = personaje.getPeliculasSeries();
     }
 
     //getters y setters
@@ -74,11 +76,11 @@ public class PersonajeDTO {
         this.historia = historia;
     }
 
-    public Set<PersonajePeliculaSerieDTO> getPeliculasSeries() {
+    public Set<PeliculaSerie> getPeliculasSeries() {
         return peliculasSeries;
     }
 
-    public void setPeliculasSeries(Set<PersonajePeliculaSerieDTO> peliculasSeries) {
+    public void setPeliculasSeries(Set<PeliculaSerie> peliculasSeries) {
         this.peliculasSeries = peliculasSeries;
     }
 }

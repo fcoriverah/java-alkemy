@@ -1,5 +1,6 @@
 package com.alkemy.disney.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -17,30 +18,31 @@ public class PeliculaSerie {
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
 
-    //relaacion
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="personaje_id")
-    private Personaje personaje;
-
-    //relacion con PersonajePeliculaSerie
-    @OneToMany(mappedBy="peliculaSerie", fetch=FetchType.EAGER)
-    private Set<PersonajePeliculaSerie> personajePeliculasSeries = new HashSet<>();
-
-    @OneToMany(mappedBy="peliculaSerie", fetch=FetchType.EAGER)
-    private Set<GeneroPeliculaSerie> generoPeliculaSeries = new HashSet<>();
-
     //atributos
     private String imagen;
     private String titulo;
     private LocalDateTime fechaCreacion;
     private Integer calificacion;
 
+    //relacion manyToMany con personajes
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "personajes_peliculasSeries",
+            joinColumns = @JoinColumn(name = "peliculaSerie_id"),
+            inverseJoinColumns = @JoinColumn(name = "personaje_id"))
+    private Set<Personaje> personajes = new HashSet<>();
+
+    //relacion manuToMany con géneros
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "generos_peliculasSeries",
+            joinColumns = @JoinColumn(name = "peliculaSerie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genero_id"))
+    private Set<Genero> generos = new HashSet<>();
+
     //constructor
     public PeliculaSerie() {
     }
 
-    public PeliculaSerie(Personaje personaje, String imagen, String titulo, LocalDateTime fechaCreacion, Integer calificacion) {
-        this.personaje = personaje;
+    public PeliculaSerie(String imagen, String titulo, LocalDateTime fechaCreacion, Integer calificacion) {
         this.imagen = imagen;
         this.titulo = titulo;
         this.fechaCreacion = fechaCreacion;
@@ -51,14 +53,6 @@ public class PeliculaSerie {
 
     public long getId() {
         return id;
-    }
-
-    public Personaje getPersonaje() {
-        return personaje;
-    }
-
-    public void setPersonaje(Personaje personaje) {
-        this.personaje = personaje;
     }
 
     public String getImagen() {
@@ -93,19 +87,21 @@ public class PeliculaSerie {
         this.calificacion = calificacion;
     }
 
-    public Set<PersonajePeliculaSerie> getPersonajePeliculasSeries() {
-        return personajePeliculasSeries;
+    @JsonIgnore
+    public Set<Personaje> getPersonajes() {
+        return personajes;
     }
 
-    public void setPersonajePeliculasSeries(Set<PersonajePeliculaSerie> personajePeliculasSeries) {
-        this.personajePeliculasSeries = personajePeliculasSeries;
+    public void setPersonajes(Set<Personaje> personajes) {
+        this.personajes = personajes;
     }
 
-    public Set<GeneroPeliculaSerie> getGeneroPeliculaSeries() {
-        return generoPeliculaSeries;
+    public Set<Genero> getGeneros() {
+        return generos;
     }
 
-    public void setGeneroPeliculaSeries(Set<GeneroPeliculaSerie> generoPeliculaSeries) {
-        this.generoPeliculaSeries = generoPeliculaSeries;
+    @JsonIgnore
+    public void setGeneros(Set<Genero> generos) {
+        this.generos = generos;
     }
 }

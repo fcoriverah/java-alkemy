@@ -1,5 +1,7 @@
 package com.alkemy.disney.controllers;
 
+import com.alkemy.disney.dtos.GeneroDTO;
+import com.alkemy.disney.dtos.PeliculaSerieDTO;
 import com.alkemy.disney.dtos.PersonajeDTO;
 import com.alkemy.disney.models.Personaje;
 import com.alkemy.disney.repositories.PersonajeRepository;

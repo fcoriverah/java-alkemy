@@ -17,9 +17,9 @@ public class Genero {
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
 
-    //relaacion
-    @OneToMany(mappedBy="genero", fetch=FetchType.EAGER)
-    private Set<GeneroPeliculaSerie> generoPeliculaSeries = new HashSet<>();
+    //relacion ManyToMany con peliculaSeries
+    @ManyToMany(mappedBy = "generos")
+    private Set<PeliculaSerie> peliculasSeries = new HashSet<>();
 
     //atributos
     private String nombre;
@@ -59,11 +59,11 @@ public class Genero {
         this.imagen = imagen;
     }
 
-    public Set<GeneroPeliculaSerie> getGeneroPeliculaSeries() {
-        return generoPeliculaSeries;
+    public Set<PeliculaSerie> getPeliculasSeries() {
+        return peliculasSeries;
     }
 
-    public void setGeneroPeliculaSeries(Set<GeneroPeliculaSerie> generoPeliculaSeries) {
-        this.generoPeliculaSeries = generoPeliculaSeries;
+    public void setPeliculasSeries(Set<PeliculaSerie> peliculasSeries) {
+        this.peliculasSeries = peliculasSeries;
     }
 }
