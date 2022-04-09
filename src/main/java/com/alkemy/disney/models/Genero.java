@@ -17,21 +17,21 @@ public class Genero {
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
 
+    //atributos
+    private String imagen;
+    private String nombre;
+
     //relacion ManyToMany con peliculaSeries
     @ManyToMany(mappedBy = "generos")
     private Set<PeliculaSerie> peliculasSeries = new HashSet<>();
-
-    //atributos
-    private String nombre;
-    private String imagen;
 
     //constructor
     public Genero() {
     }
 
-    public Genero(String nombre, String imagen) {
-        this.nombre = nombre;
+    public Genero(String imagen, String nombre) {
         this.imagen = imagen;
+        this.nombre = nombre;
     }
 
     //getters y setters
@@ -59,6 +59,7 @@ public class Genero {
         this.imagen = imagen;
     }
 
+    @JsonIgnore
     public Set<PeliculaSerie> getPeliculasSeries() {
         return peliculasSeries;
     }

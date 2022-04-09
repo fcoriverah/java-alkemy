@@ -2,26 +2,30 @@ package com.alkemy.disney.dtos;
 
 import com.alkemy.disney.models.Genero;
 import com.alkemy.disney.models.PeliculaSerie;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class GeneroDTO {
 
     //atributos
+    private long id;
     private String nombre;
     private String imagen;
     private Set<PeliculaSerie> peliculasSeries;
 
     //constructor
     public GeneroDTO(Genero genero) {
+        this.id = genero.getId();
         this.nombre = genero.getNombre();
         this.imagen = genero.getImagen();
         this.peliculasSeries = genero.getPeliculasSeries();
     }
 
     //getter y setter
+    public long getId() {
+        return id;
+    }
+
     public String getNombre() {
         return nombre;
     }

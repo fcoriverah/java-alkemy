@@ -1,41 +1,28 @@
 package com.alkemy.disney.controllers;
 
-import com.alkemy.disney.dtos.GeneroDTO;
-import com.alkemy.disney.dtos.PeliculaSerieDTO;
-import com.alkemy.disney.dtos.PersonajeDTO;
-import com.alkemy.disney.models.Personaje;
 import com.alkemy.disney.repositories.PersonajeRepository;
 import com.alkemy.disney.services.PersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Random;
-
-import static java.util.stream.Collectors.toList;
+import java.util.Optional;
 
 @RestController
 public class PersonajeController {
 
     @Autowired
-    private PersonajeRepository personajeRepository;
-
-    @Autowired
     private PersonajeService personajeService;
 
+    //obtener todos los personajes
     @GetMapping("api/personajes")
-    public List<PersonajeDTO> getPersonajes(){
-        return personajeRepository.findAll().stream().map(PersonajeDTO::new).collect(toList());
+    public ResponseEntity<Object> getPersonajes(@RequestParam Optional<String> name, @RequestParam Optional<String> sortBy) {
+        return personajeService.getPersonaje(name, sortBy);
     }
 
-    @PostMapping("api/personajes")
-    public ResponseEntity<Object> register(
+    //crear un personaje nuevo
+    @PostMapping("api/personaje")
+    public ResponseEntity<Object> createPersonaje(
             @RequestParam String imagen, @RequestParam String nombre,
             @RequestParam Integer edad, @RequestParam Double peso, @RequestParam String historia) {
 

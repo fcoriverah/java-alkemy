@@ -1,7 +1,6 @@
 package com.alkemy.disney.controllers;
 
 import com.alkemy.disney.dtos.PeliculaSerieDTO;
-import com.alkemy.disney.dtos.PersonajeDTO;
 import com.alkemy.disney.repositories.PeliculaSerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +16,7 @@ public class PeliculaSerieController {
     @Autowired
     private PeliculaSerieRepository peliculaSerieRepository;
 
+    //obtener todas las peliculas y series
     @GetMapping("api/peliculas-series")
     public List<PeliculaSerieDTO> getPeliculasSeries(){
         return peliculaSerieRepository.findAll().stream().map(PeliculaSerieDTO::new).collect(toList());

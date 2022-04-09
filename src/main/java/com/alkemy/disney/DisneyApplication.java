@@ -32,6 +32,9 @@ public class DisneyApplication {
 			Personaje personaje2 = new Personaje("https://static.wikia.nocookie.net/sonic", "Will Smith", 45, 80.3, "Aqui va la historia");
 			personajeRepository.save(personaje2);
 
+			Personaje personaje3 = new Personaje("https://static.wikia.nocookie.net/tazmania", "Tazmania", 18, 20.8, "Aqui va la historia");
+			personajeRepository.save(personaje3);
+
 			PeliculaSerie peliculaSerie1 = new PeliculaSerie("https://static.wikia.nocookie.net/sonic-movie", "Sonic - La Pelicula", LocalDateTime.now(), 5);
 			peliculaSerieRepository.save(peliculaSerie1);
 
@@ -47,6 +50,9 @@ public class DisneyApplication {
 			Genero genero1 = new Genero("Terror", "http://imagen.com/terror");
 			generoRepository.save(genero1);
 
+			Genero genero2 = new Genero("Humor", "http://imagen.com/humor");
+			generoRepository.save(genero2);
+
 			//personaje1.setPeliculasSeries(Set.of(peliculaSerie1, peliculaSerie2, peliculaSerie3));
 
 			// Add tag references in the post
@@ -56,8 +62,11 @@ public class DisneyApplication {
 
 
 			genero1.getPeliculasSeries().add(peliculaSerie1);
+			genero2.getPeliculasSeries().add(peliculaSerie1);
 			peliculaSerie1.getGeneros().add(genero1);
+			peliculaSerie1.getGeneros().add(genero2);
 			generoRepository.save(genero1);
+			generoRepository.save(genero2);
 			peliculaSerieRepository.save(peliculaSerie1);
 
 
@@ -67,6 +76,9 @@ public class DisneyApplication {
 			personaje1.getPeliculasSeries().add(peliculaSerie2);
 			peliculaSerie2.getPersonajes().add(personaje1);
 			personajeRepository.save(personaje2);
+			genero2.getPeliculasSeries().add(peliculaSerie2);
+			peliculaSerie2.getGeneros().add(genero2);
+			generoRepository.save(genero2);
 			peliculaSerieRepository.save(peliculaSerie2);
 
 			personaje2.getPeliculasSeries().add(peliculaSerie3);
